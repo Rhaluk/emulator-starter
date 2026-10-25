@@ -1,0 +1,11 @@
+[package]
+name = "cosmic-applet-emulator"
+version = "0.1.0"
+edition = "2021"
+description = "COSMIC panel applet for starting installed Android emulators"
+
+[dependencies]
+libcosmic = { git = "https://github.com/pop-os/libcosmic", rev = "430f3d48a97d8779f9c1985473912e594ccca1ae", default-features = false, features = [
+    "applet-token",
+    "tokio",
+] }

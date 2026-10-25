@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Emulators
+Comment=Start and stop installed Android emulators
+Exec=cosmic-applet-emulator
+Icon=io.github.emulatorstarter.CosmicApplet
+Terminal=false
+Categories=System;
+Keywords=Android;Emulator;AVD;
+NoDisplay=true
+X-CosmicApplet=true
+X-CosmicHoverPopup=Auto
+X-OverflowPriority=10
