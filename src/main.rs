@@ -51,7 +51,6 @@ pub enum Message {
     PopupClosed(Id),
     KickScan,
     Refresh,
-    Poll,
     Select(String),
     Start(String),
     Stop(String),
@@ -125,13 +124,6 @@ impl Application for EmulatorApplet {
                 self.busy = true;
                 self.scan_pending = false;
                 return scan_task(true);
-            }
-            Message::Poll => {
-                if self.busy || self.popup.is_none() {
-                    return Task::none();
-                }
-                self.busy = true;
-                return scan_task(false);
             }
             Message::Select(name) => {
                 self.selected = Some(name.clone());
@@ -210,17 +202,11 @@ impl Application for EmulatorApplet {
     }
 
     fn subscription(&self) -> Subscription<Message> {
-        let mut subscriptions = Vec::new();
-        if self.popup.is_some() {
-            subscriptions
-                .push(cosmic::iced::time::every(Duration::from_secs(2)).map(|_| Message::Poll));
-        }
         if self.scan_pending {
-            subscriptions.push(
-                cosmic::iced::time::every(Duration::from_millis(16)).map(|_| Message::KickScan),
-            );
+            cosmic::iced::time::every(Duration::from_millis(16)).map(|_| Message::KickScan)
+        } else {
+            Subscription::none()
         }
-        Subscription::batch(subscriptions)
     }
 
     fn style(&self) -> Option<cosmic::iced::theme::Style> {
