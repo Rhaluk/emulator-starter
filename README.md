@@ -7,8 +7,8 @@ A COSMIC panel applet that lists the Android emulators installed on the machine,
 Requires the COSMIC desktop, Rust, and the Android SDK (`emulator` and `adb` on `PATH`, or `ANDROID_HOME`).
 
 ```sh
-git clone <repository-url>
-cd <cloned-directory>
+git clone https://github.com/Rhaluk/emulator-starter.git
+cd emulator-starter
 cargo build --release
 ./install.sh
 ```
